@@ -5,7 +5,7 @@
 
 bool GameRunning;
 char PlayerAvatar = '@';
-int GameCurrentLevel, UnlockedLevels = 1;
+int GameCurrentLevel, UnlockedLevels = 1, MaxLevel = 4;
 string PlayerName = "Player";
 VarGameState GameState;
 
@@ -88,7 +88,7 @@ void SelectLevelMenu()
     system("cls");
     cout << "======== ÂÛÁÎÐ ÓÐÎÂÍß =========" << endl;
 
-    for (int i = 1; i <= 3; i++)
+    for (int i = 1; i <= MaxLevel; i++)
     {
         cout << "Óðîâåíü\t" << i << (i <= UnlockedLevels ? "" : " (çàáëîêèðîâàí)") << endl;
     }
@@ -102,7 +102,7 @@ void SelectLevelMenu()
         GameState = MAIN_MENU;
 
     }
-    else if (input >= 1 && input <= 3 && input <= UnlockedLevels)
+    else if (input >= 1 && input <= MaxLevel && input <= UnlockedLevels)
     {
         GameCurrentLevel = input;
         InitLevel();

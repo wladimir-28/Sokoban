@@ -22,4 +22,5 @@ int main()
     SaveProgress();
     system("cls");
     cout << "До новых встреч!" << endl;
+    system("pause");
 }

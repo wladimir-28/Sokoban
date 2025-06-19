@@ -22,11 +22,11 @@ void InitLevel()
             Level_3();
             break;
 
-        /*case 4:
+        case 4:
             Level_4();
             break;
 
-        case 5:
+            /*case 5:
             Level_5();
             break;
 
@@ -89,6 +89,25 @@ void Level_2()
 
 void Level_3()
 {
+    Rows = 9, Cols = 9;
+    PlayerRow = 2, PlayerCol = 2;
+    WinRow = 7, WinCol = 8;
+
+    // 0 - пустое поле, 1 - стена, 2 - игрок, 3 - ящик, 4 - кнопка, 5 - игрок на кнопке, 6 - ящик на кнопке
+    Level = new int* [Rows];
+    Level[0] = new int[Cols] {0, 0, 1, 1, 1, 1, 1, 0, 0};
+    Level[1] = new int[Cols] {1, 1, 1, 0, 0, 0, 1, 0, 0};
+    Level[2] = new int[Cols] {1, 4, 2, 3, 0, 0, 1, 0, 0};
+    Level[3] = new int[Cols] {1, 1, 1, 0, 3, 4, 1, 0, 0};
+    Level[4] = new int[Cols] {1, 4, 1, 1, 3, 0, 1, 0, 0};
+    Level[5] = new int[Cols] {1, 0, 1, 0, 4, 0, 1, 1, 1};
+    Level[6] = new int[Cols] {1, 3, 0, 6, 3, 3, 0, 4, 1};
+    Level[7] = new int[Cols] {1, 0, 0, 0, 4, 0, 0, 0, 1};
+    Level[8] = new int[Cols] {1, 1, 1, 1, 1, 1, 1, 1, 1};
+}
+
+void Level_4()
+{
     Rows = 8, Cols = 8;
     PlayerRow = 6, PlayerCol = 2;
     WinRow = 1, WinCol = 6;
@@ -115,6 +134,7 @@ void Gameplay()
 {
     while (!CheckWin() && GameState == GAMEPLAY)
     {
+        ExitStatus();
         PrintLevel();
         MovePlayer();
     }
@@ -123,7 +143,7 @@ void Gameplay()
     {
         cout << endl << "Уровень " << GameCurrentLevel << " пройден! Поздравляю, " << PlayerName << " " << endl;
         system("pause");
-        if (GameCurrentLevel == UnlockedLevels && UnlockedLevels < 3)
+        if (GameCurrentLevel == UnlockedLevels && UnlockedLevels < MaxLevel)
         {
             UnlockedLevels++;
         }
@@ -139,7 +159,7 @@ void PrintLevel()
     cout << "==================== УРОВЕНЬ " << GameCurrentLevel << " ====================" << endl;
     cout << "Если все кнопки нажаты - открывается выход с уровня" << endl;
     cout << "WASD - движение, R - рестарт, ESC - возврат в меню" << endl << endl;
-    CheckOpenExit();
+    
     for (int i = 0; i < Rows; ++i) 
     {
         cout << "\t\t";
@@ -167,7 +187,7 @@ bool CanMove(int newRow, int newCol) {
     }
 }
 
-void CheckOpenExit() //проверка открытия выхода
+void ExitStatus() //проверка открытия выхода
 {
     bool check = true;
     for (int i = 0; i < Rows; ++i)

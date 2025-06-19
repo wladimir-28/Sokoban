@@ -21,7 +21,7 @@ enum VarGameState
 
 extern bool GameRunning;
 extern char PlayerAvatar;
-extern int GameCurrentLevel, UnlockedLevels;
+extern int GameCurrentLevel, UnlockedLevels, MaxLevel;
 extern string PlayerName;
 extern VarGameState GameState;
 
