@@ -25,34 +25,6 @@ void InitLevel()
         case 4:
             Level_4();
             break;
-
-            /*case 5:
-            Level_5();
-            break;
-
-        case 6:
-            Level_6();
-            break;
-
-        case 7:
-            Level_7();
-            break;
-
-        case 8:
-            Level_8();
-            break;
-
-        case 9:
-            Level_9();
-            break;
-
-        case 10:
-            Level_10();
-            break;
-
-        case 11:
-            Level_11();
-            break;*/
     }
 }
 
@@ -141,8 +113,10 @@ void Gameplay()
 
     if (CheckWin())
     {
-        cout << endl << "Уровень " << GameCurrentLevel << " пройден! Поздравляю, " << PlayerName << " " << endl;
+        if (GameCurrentLevel == MaxLevel) { cout << "Все уровни игры пройдены! Поздравляю, " << PlayerName << " !" << endl;}
+        else { cout << endl << "Уровень " << GameCurrentLevel << " пройден!" << endl;}
         system("pause");
+
         if (GameCurrentLevel == UnlockedLevels && UnlockedLevels < MaxLevel)
         {
             UnlockedLevels++;
@@ -176,15 +150,8 @@ void PrintLevel()
 }
 
 bool CanMove(int newRow, int newCol) {
-    if (newRow < 0 || newRow >= Rows || newCol < 0 || newCol >= Cols) 
-    {
-        return false; 
-    }
-
-    int c = Level[newRow][newCol];
-    {
-        return c == 0 || c == 3 || c == 4 || c == 6;
-    }
+    int cell = Level[newRow][newCol];
+    return !(newRow < 0 || newRow >= Rows || newCol < 0 || newCol >= Cols)  &&   (cell == 0 || cell == 3 || cell == 4 || cell == 6);
 }
 
 void ExitStatus() //проверка открытия выхода
@@ -208,7 +175,7 @@ void ExitStatus() //проверка открытия выхода
     }
 }
 
-bool CheckWin() // тру это победа 
+bool CheckWin()
 {
     return (PlayerRow == WinRow && PlayerCol == WinCol);
 }
